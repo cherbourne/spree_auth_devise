@@ -16,6 +16,7 @@ class Spree::UserSessionsController < Devise::SessionsController
     authenticate_spree_user!
 
     if spree_user_signed_in?
+      fire_event('spree.user.logged_in')
       respond_to do |format|
         format.html {
           flash[:success] = t(:logged_in_succesfully)
